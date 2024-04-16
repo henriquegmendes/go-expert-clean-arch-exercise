@@ -25,6 +25,7 @@ foi realizado as seguintes alterações:
 - Atualizado injeção de dependências no wire
 - Adicionado novos services nas camadas de webservice, gRPC e graphql que utilizam o novo usecase acima citado
 - Adicionado `Makefile` para auxiliar na iniciação do projeto
+- Adicionado package `migrations` que possibilita executar as migrations necessarias no banco antes de iniciar o servidor
 - Alterado versão do MYSQL de 5.7 para 8 no `docker-compose.yaml` devido a problemas de compatibilidade da versão 5.7
   com meu MAC arm64
 
@@ -39,13 +40,6 @@ Com o Docker instalado, seguir os seguintes passos
 
 - Na raíz do projeto, executar no terminal `go mod tidy` para instalar todas as dependências
 - Executar o comando `make start` no terminal. Ele execuratá o docker-compose e iniciará a aplicação GO
-- Caso o database do MYSQL esteja limpo, executar os seguintes comandos no terminal
-    - `docker ps` para listar os containers em execução, em seguida copie o ID do container do MYSQL
-    - `docker exec -it <id_do_container_mysql> bash` para acessar o container
-    - Dentro do container, executar `mysql -uroot -proot orders`
-    - Criar a tabela orders
-      executando `create table orders (id varchar(255), price decimal(10,2), tax decimal(10,2), final_price decimal(10,2), primary key (id));`
-    - Executar `exit` para sair do container
 
 ### Executando novo Serviço
 

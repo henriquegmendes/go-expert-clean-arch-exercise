@@ -14,6 +14,7 @@ import (
 	"github.com/devfullcycle/20-CleanArch/internal/infra/grpc/pb"
 	"github.com/devfullcycle/20-CleanArch/internal/infra/grpc/service"
 	"github.com/devfullcycle/20-CleanArch/internal/infra/web/webserver"
+	"github.com/devfullcycle/20-CleanArch/migrations"
 	"github.com/devfullcycle/20-CleanArch/pkg/events"
 	"github.com/streadway/amqp"
 	"google.golang.org/grpc"
@@ -34,6 +35,11 @@ func main() {
 		panic(err)
 	}
 	defer db.Close()
+
+	err = migrations.RunMigrations(db)
+	if err != nil {
+		panic(err)
+	}
 
 	rabbitMQChannel := getRabbitMQChannel()
 
